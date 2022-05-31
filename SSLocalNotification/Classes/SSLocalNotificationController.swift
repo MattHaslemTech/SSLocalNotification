@@ -65,7 +65,8 @@ open class SSLocalNotificationController: UIView, SSLocalNotificationActionDeleg
     
     
     // The blur style of the notification
-    private var style = UIBlurEffectStyle.light
+    //private var style = UIBlurEffectStyle.light
+    private var style = UIBlurEffect.Style.light
     
     
     // Determines whether or not the notification can expand
@@ -134,7 +135,8 @@ open class SSLocalNotificationController: UIView, SSLocalNotificationActionDeleg
         // If accessibility prevents the blur then the background color is just white
         let blurEffect = UIBlurEffect(style: style)
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        // if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled() {
             // Add blur effect to the screen overlay
             screenOverlay.effect = blurEffect
             
@@ -407,7 +409,8 @@ open class SSLocalNotificationController: UIView, SSLocalNotificationActionDeleg
 private extension String {
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox    = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        // let boundingBox    = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox    = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return boundingBox.height
     }
